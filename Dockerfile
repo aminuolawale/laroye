@@ -2,7 +2,7 @@
 FROM python:3
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-RUN apt update &&  apt install nodejs -y && apt install npm -y
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh && bash /tmp/nodesource_setup.sh &&  apt install nodejs
 WORKDIR /client
 COPY ./client/package.json ./client/package-lock.json ./
 RUN npm install
