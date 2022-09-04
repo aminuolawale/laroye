@@ -1,0 +1,84 @@
+$xsm-circle: 100px;
+$sm-circle: 180px;
+$lg-circle: 400px;
+
+.home {
+    &__content {
+        &__hero {
+            height: 600px;
+            display: flex;
+            flex-direction: row;
+            overflow: clip;
+
+            &__info {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                &__title {
+                    font-size: $xlg-font;
+
+                    &:hover {
+                        background-image: linear-gradient(135deg, $secondary-color, $tertiary-color);
+                        background-size: 100%;
+                        -webkit-background-clip: text;
+                        -moz-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        -moz-text-fill-color: transparent;
+                    }
+                }
+
+                &__description {
+                    font-size: $md-font;
+                }
+
+                &__links {
+                    margin-top: 40px;
+                }
+            }
+
+            &__art {
+                width: 100%;
+                position: relative;
+
+                &>div {
+                    background-color: $tertiary-color;
+                    position: absolute;
+                    background-image: linear-gradient(-45deg, $secondary-color, $tertiary-color);
+
+                    &:hover {
+                        background-image: linear-gradient(135deg, $secondary-color, $tertiary-color);
+
+                    }
+                }
+
+                &--xsm {
+                    width: $xsm-circle;
+                    height: $xsm-circle;
+                    top: calc(50% - #{$xsm-circle/2});
+                    left: calc(25% - #{$xsm-circle/2});
+                    border-radius: $xsm-circle/2;
+
+                }
+
+                &--sm {
+                    width: $sm-circle;
+                    height: $sm-circle;
+                    top: calc(75% - #{$sm-circle/2});
+                    left: calc(50% - #{$sm-circle/2});
+                    border-radius: $sm-circle/2;
+                }
+
+                &--lg {
+                    width: $lg-circle;
+                    height: $lg-circle;
+                    top: -$lg-circle/4;
+                    right: -$lg-circle/4;
+                    border-radius: $lg-circle/2;
+                }
+            }
+        }
+
+    }
+}

@@ -1,0 +1,19 @@
+.signup {
+    &__content {
+        margin-top: $navbar-content-margin;
+        height: 600px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        overflow: clip;
+
+        &__form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+}

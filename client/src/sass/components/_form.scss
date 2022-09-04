@@ -1,0 +1,38 @@
+.form {
+    width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    &__fieldgroup {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+
+        &>input {
+            font-size: $md-font;
+            border: 1px solid $primary-color;
+            padding: 10px;
+        }
+    }
+
+    &__button {
+        font-size: $sm-font;
+        background: $primary-color;
+        width: 100%;
+        color: $white;
+        text-align: center;
+        padding: 10px;
+
+        &:hover {
+            cursor: pointer;
+            background-image: linear-gradient(135deg, $secondary-color, $tertiary-color);
+
+        }
+    }
+
+
+}

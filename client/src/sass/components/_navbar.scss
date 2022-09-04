@@ -1,0 +1,23 @@
+.navbar {
+    background-color: $primary-color;
+    &__content {
+        width: $max-screen-width;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        color: $white;
+        height: 80px;
+
+        &__title {
+            font-size: $md-font;
+        }
+
+        &__links>a {
+            margin: 0 10px 0 10px;
+            padding: 0 10px 0 10px;
+        }
+    }
+
+}
