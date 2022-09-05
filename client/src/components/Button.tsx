@@ -9,7 +9,7 @@ type Props = {
 
 const Button = ({ text, size, link = "/" }: Props) => {
     return (
-        <Link className={`button button--${size}`} to="link">
+        <Link className={`button button--${size}`} to={link}>
             {text}
         </Link>
 
