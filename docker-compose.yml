@@ -9,6 +9,7 @@ services:
       - ./.env
   backend:
     build: .
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
@@ -17,3 +18,21 @@ services:
       - ./.env
     depends_on:
       - db
+  frontend:
+    restart: always
+    command: npm start
+    container_name: front
+    build:
+      context: ./client/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    depends_on:
+      - backend
+    networks:
+      - db-net
+
+networks:
+  db-net:
+    driver: bridge
