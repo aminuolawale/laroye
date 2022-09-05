@@ -4,6 +4,8 @@ $lg-circle: 400px;
 
 .home {
     &__content {
+        margin-top: $navbar-content-margin;
+
         &__hero {
             height: 600px;
             display: flex;
@@ -19,15 +21,14 @@ $lg-circle: 400px;
                 &__title {
                     font-size: $xlg-font;
 
-                    &:hover {
-                        background-image: linear-gradient(135deg, $secondary-color, $tertiary-color);
-                        background-size: 100%;
-                        -webkit-background-clip: text;
-                        -moz-background-clip: text;
-                        -webkit-text-fill-color: transparent;
-                        -moz-text-fill-color: transparent;
-                    }
+                    background-image: linear-gradient(135deg, $secondary-color, $tertiary-color);
+                    background-size: 100%;
+                    -webkit-background-clip: text;
+                    -moz-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    -moz-text-fill-color: transparent;
                 }
+
 
                 &__description {
                     font-size: $md-font;
@@ -65,7 +66,7 @@ $lg-circle: 400px;
                 &--sm {
                     width: $sm-circle;
                     height: $sm-circle;
-                    top: calc(75% - #{$sm-circle/2});
+                    top: calc(80% - #{$sm-circle/2});
                     left: calc(50% - #{$sm-circle/2});
                     border-radius: $sm-circle/2;
                 }
@@ -73,8 +74,8 @@ $lg-circle: 400px;
                 &--lg {
                     width: $lg-circle;
                     height: $lg-circle;
-                    top: -$lg-circle/4;
-                    right: -$lg-circle/4;
+                    top: 2%;
+                    right: 2%;
                     border-radius: $lg-circle/2;
                 }
             }
