@@ -9,7 +9,7 @@ const Home = () => {
                 <div className='home__content__hero'>
                     <div className='home__content__hero__info'>
                         <p className='home__content__hero__info__title'>Laroye</p>
-                        <p className='home__content__hero__info__description'>An A.I productivity assistant for social media professionals</p>
+                        <p className='home__content__hero__info__description'>The productivity assistant for social media professionals</p>
                         <div className='home__content__hero__info__links'>
                             <Button text="Get started" size="md" link="login" />
                         </div>
