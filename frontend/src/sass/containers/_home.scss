@@ -36,6 +36,10 @@ $lg-circle: 400px;
 
                 &__links {
                     margin-top: 40px;
+
+                    &>a {
+                        margin-right: 20px;
+                    }
                 }
             }
 

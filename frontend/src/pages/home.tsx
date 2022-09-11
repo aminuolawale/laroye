@@ -12,6 +12,7 @@ const Home = () => {
                         <p className='home__content__hero__info__description'>The productivity assistant for social media professionals</p>
                         <div className='home__content__hero__info__links'>
                             <Button text="Get started" size="md" link="login" />
+                            <a href='https://drive.google.com/file/d/1r44nZlyO85hBhR00RTywEwh0_UbYIgYA/view?usp=sharing' target='_blank'>View our pitch</a>
                         </div>
                     </div>
                     <HeroArt />
