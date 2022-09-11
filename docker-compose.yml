@@ -6,33 +6,49 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     env_file:
-      - ./.env
+      - ./db/.env
+
+  nginx:
+    depends_on:
+      - backend
+      - frontend
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    links:
+      - "backend"
+      - "frontend"
+      - "db"
   backend:
-    build: .
+    restart: always
     command: python manage.py runserver 0.0.0.0:8000
+    container_name: backend
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
     volumes:
-      - .:/code
+      - ./backend:/code
     ports:
       - "8000:8000"
     env_file:
-      - ./.env
+      - ./backend/.env
     depends_on:
       - db
   frontend:
     restart: always
     command: npm start
-    container_name: front
+    container_name: frontend
     build:
-      context: ./client/
+      context: ./frontend/
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     stdin_open: true
     depends_on:
       - backend
-    networks:
-      - db-net
-
 networks:
   db-net:
     driver: bridge
