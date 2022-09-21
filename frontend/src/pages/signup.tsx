@@ -2,6 +2,7 @@ import React from 'react'
 import HeroArt from '../components/HeroArt';
 import SignupForm from '../components/SignupForm';
 
+
 const Signup = () => {
     return (
         <div className='signup'>

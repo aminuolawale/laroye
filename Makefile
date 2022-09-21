@@ -2,23 +2,23 @@ LIGHTSAIL_STATIC_IP:=3.124.140.45
 LIGHTSAIL_KEY_PATH:= ./key.pem
 LIGHTSAIL_HOST:=ubuntu
 startproject:
-	sudo docker-compose run web django-admin startproject laroye .
+	sudo docker-compose run backend django-admin startproject laroye .
 start:
 	docker-compose up
 build-and-start:
 	docker-compose up --build
 
 startapp:
-	docker-compose run web python manage.py startapp $(app)
+	docker-compose run backend python manage.py startapp $(app)
 
 superuser:
-	docker-compose run web python manage.py createsuperuser
+	docker-compose run backend python manage.py createsuperuser
 
 migrations:
-	docker-compose run web python manage.py makemigrations
+	docker-compose run backend python manage.py makemigrations
 
 migrate:
-	docker-compose run web python manage.py migrate
+	docker-compose run backend python manage.py migrate
 
 db:
 	docker-compose exec db /bin/bash

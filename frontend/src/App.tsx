@@ -1,8 +1,8 @@
 
-import React from 'react'
+import React from 'react';
 import Home from './pages/home';
 import Layout from './pages/layout'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import "./sass/main.scss";
 import Login from './pages/login';
 import Signup from './pages/signup';
@@ -10,15 +10,13 @@ import Signup from './pages/signup';
 const App = () => {
   return (
     <div>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
     </div>
   )
 }
