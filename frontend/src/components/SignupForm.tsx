@@ -25,13 +25,13 @@ const SignupForm = () => {
                 <input type="text" placeholder='Email' {...register('email')} />
             </div>
             <div className='form__fieldgroup'>
-                <input type="password" placeholder="Password" {...register('password')} />
+                <input type="password" placeholder="Password" {...register('password')} required/>
             </div>
             <div className='form__fieldgroup'>
-                <input type="text" placeholder="First Name" {...register('first_name')} />
+                <input type="text" placeholder="First Name" {...register('first_name')} required/>
             </div>
             <div className='form__fieldgroup'>
-                <input type="text" placeholder="Last Name" {...register('last_name')} />
+                <input type="text" placeholder="Last Name" {...register('last_name')} required/>
             </div>
             <button type="submit" className='form__button'>Signup</button>
         </form>

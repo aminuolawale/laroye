@@ -19,19 +19,22 @@ class RegistrationAPI(CreateAPIView):
             return Response(dict(success=True, errors=[], data=user_data), status=status.HTTP_201_CREATED)
         return Response(dict(success=False, errors=registration_serializer.errors, data={}), status=status.HTTP_400_BAD_REQUEST)
 
+
 class LoginAPI(TokenObtainPairView):
     def post(self, request, *args, **kwargs) -> Response:
         try:
-            response  = super().post(request, args, kwargs)
-        except:
-            return Response(dict(success=False, errors=[], data={}), status=status.HTTP_400_BAD_REQUEST) 
-        return Response(dict(success=response.status_code==status.HTTP_200_OK, errors=[], data=response.data), status=response.status_code)
-
-# fix
-class RefreshTokenAPI(TokenRefreshView):
-    def post(self, request, *args, **kwargs) -> Response:
-        try: 
             response = super().post(request, args, kwargs)
         except:
             return Response(dict(success=False, errors=[], data={}), status=status.HTTP_400_BAD_REQUEST)
-        return Response(dict(success=response.status_code==status.HTTP_200_OK, errors=[], data=response.data), status=response.status_code)
+        return Response(dict(success=response.status_code == status.HTTP_200_OK, errors=[], data=response.data), status=response.status_code)
+
+# fix
+
+
+class RefreshTokenAPI(TokenRefreshView):
+    def post(self, request, *args, **kwargs) -> Response:
+        try:
+            response = super().post(request, args, kwargs)
+        except:
+            return Response(dict(success=False, errors=[], data={}), status=status.HTTP_400_BAD_REQUEST)
+        return Response(dict(success=response.status_code == status.HTTP_200_OK, errors=[], data=response.data), status=response.status_code)

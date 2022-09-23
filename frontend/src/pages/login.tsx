@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HeroArt from '../components/HeroArt'
 import LoginForm from '../components/LoginForm'
-import SignupForm from '../components/SignupForm'
+import { useDispatch } from 'react-redux'
+import { loginUser, logOutUser } from '../features/auth/authSlice'
 const Login = () => {
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(logOutUser())
+    })
     return (
         <div className='login'>
             <div className="login__content">

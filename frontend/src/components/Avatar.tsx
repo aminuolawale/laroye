@@ -1,8 +1,7 @@
 import React from 'react'
 const Avatar = ({user}:{user:any}) => {
-    console.log(user)
     return (
-        <div>{user.email}</div>
+        <div>{user?.email}</div>
     )
 }
 

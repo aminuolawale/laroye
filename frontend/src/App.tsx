@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router-dom"
 import "./sass/main.scss";
 import Login from './pages/login';
 import Signup from './pages/signup';
+import Account from './pages/account';
+import SocialData from './pages/socialData';
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
+          <Route path="account" element={<Account/>} />
+          <Route path="social/social-data/:id" element={<SocialData/>}/>
         </Route>
       </Routes>
     </div>

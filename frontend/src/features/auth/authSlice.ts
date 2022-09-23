@@ -11,18 +11,18 @@ const readFromLocalStorage = (key: string) => {
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { user: null, accessToken: readFromLocalStorage("accessToken"), refreshToken: readFromLocalStorage("refreshToken") },
+    initialState: { loggedIn: !!readFromLocalStorage("accessToken"), accessToken: readFromLocalStorage("accessToken"), refreshToken: readFromLocalStorage("refreshToken") },
     reducers: {
         loginUser: (state, action) => {
             const { user, accessToken, refreshToken } = action.payload
-            state.user = user
+            state.loggedIn = true
             state.accessToken = accessToken
             state.refreshToken = refreshToken
             localStorage.setItem("accessToken", JSON.stringify(accessToken))
             localStorage.setItem("refreshToken", JSON.stringify(refreshToken))
         },
-        logOutUser: (state, action) => {
-            state.user = null
+        logOutUser: (state) => {
+            state.loggedIn = false
             state.accessToken = null
             state.refreshToken = null
             localStorage.setItem("accessToken", "")
@@ -35,5 +35,5 @@ export const { loginUser, logOutUser } = authSlice.actions
 
 export default authSlice.reducer
 
-export const selectCurrentUser = (state: any) => state.auth.user
 export const selectCurrentToken = (state: any) => state.auth.token
+export const getLoggedInStatus  = (state:any) => state.auth.loggedIn

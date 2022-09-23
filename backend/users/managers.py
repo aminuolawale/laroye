@@ -1,5 +1,6 @@
 from tkinter.tix import Tree
 from django.contrib.auth.base_user import BaseUserManager
+from django.db.models import Manager as BaseManager
 from django.utils.translation import gettext_lazy as _
 from typing import Dict, Any
 from django.contrib.auth.models import AbstractUser
@@ -21,3 +22,11 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email: str, password: str, **extra_fields: Dict[str, Any]) -> AbstractUser:
         return self.create_user(email, password, is_super_user=True, **extra_fields)
+
+
+class SocialAccountManager(BaseManager):
+    def create_social_account(self, user, provider, username, account_created_date):
+        social_account = self.model(
+            user=user, provider=provider, username=username, account_created_date=account_created_date)
+        social_account.save()
+        return social_account

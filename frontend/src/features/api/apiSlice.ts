@@ -6,6 +6,7 @@ export const apiSlice = createApi({
         baseUrl: "http://localhost:8000/api",
         prepareHeaders: (headers, { getState }) => {
             const accessToken = (getState() as RootState).auth.accessToken
+            console.log("this is the access token", accessToken)
             if (accessToken) {
                 headers.set("Authorization", `Bearer ${accessToken}`)
                 headers.set('Content-Type', "application/json")
