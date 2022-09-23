@@ -55,7 +55,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
 ]
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:3001"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://laroye.ai",
+]
 
 ROOT_URLCONF = "laroye.urls"
 
