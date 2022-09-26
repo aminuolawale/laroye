@@ -28,8 +28,6 @@ class LoginAPI(TokenObtainPairView):
             return Response(dict(success=False, errors=[], data={}), status=status.HTTP_400_BAD_REQUEST)
         return Response(dict(success=response.status_code == status.HTTP_200_OK, errors=[], data=response.data), status=response.status_code)
 
-# fix
-
 
 class RefreshTokenAPI(TokenRefreshView):
     def post(self, request, *args, **kwargs) -> Response:

@@ -1,12 +1,8 @@
-import imp
-from ssl import cert_time_to_seconds
-from typing import Optional
-from xmlrpc.client import DateTime
 from django.contrib.auth import get_user_model
 import requests
 from .models import SocialAccount
 from django.conf import settings
-from datetime import datetime, timezone
+from datetime import datetime
 
 User = get_user_model()
 
@@ -20,7 +16,7 @@ class TwitterAPIAdapter:
     def get_url(self):
         return f"{settings.TWITTER_API_URL}/{self.endpoint}?usernames={self.username}&user.fields={','.join(self.fields)}"
 
-    def get_user_account(self):
+    def fetch_user_account(self) -> dict:
         url = self.get_url()
         try:
             response = requests.get(
@@ -36,6 +32,10 @@ class TwitterAPIAdapter:
             return response_data[0]
         except:
             raise Exception("Could not retrieve social account details")
+
+    def fetch_and_prepare_social_account_data(self):
+        raw_user_account_data = self.fetch_user_account
+        return dict()
 
     def import_data(self):
         user_account = self.get_user_account()
@@ -54,7 +54,6 @@ class TwitterAPIAdapter:
                 },
             )
             response_data = response.json().get("data")
-            print("++", response_data)
             if type(response_data) != list or len(response_data) == 0:
                 raise Exception("Could not retrieve social account data")
             return response_data
@@ -87,13 +86,15 @@ class SocialAccountService:
         data = self.get_user_social_account()
         if not data:
             return None
-        created_date = data.get("created_at")
-        date = datetime.strptime(created_date, "%Y-%m-%dT%H:%M:%S.%fZ")
+        account_created_date = datetime.strptime(
+            data.get("created_at"), settings.TWITTER_TWEET_CREATED_AT_TIME_FORMAT)
+        account_user_id = int(data.get("id"))
         return SocialAccount.objects.create_social_account(
             user=self.user,
             provider=self.provider,
             username=data.get("username"),
-            account_created_date=date,
+            account_user_id=account_user_id,
+            account_created_date=account_created_date,
         )
 
     def get_provider_adapter(self):
@@ -101,9 +102,6 @@ class SocialAccountService:
         return adapters.get(self.provider)
 
     def import_data(self):
-        social_account = SocialAccount.objects.filter(
-            username=self.username, provider=self.provider
-        ).first()
         adapter_class = self.get_provider_adapter()
         adapter = adapter_class(self.username)
         try:

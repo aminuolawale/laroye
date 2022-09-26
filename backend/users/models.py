@@ -14,21 +14,21 @@ SOCIAL_ACCOUNT_PROVIDER_CHOICES = [
 
 
 class User(AbstractUser):
-    username: models.CharField = models.CharField(
+    username = models.CharField(
         max_length=30, blank=False, unique=True
     )
-    email: models.EmailField = models.EmailField(
+    email = models.EmailField(
         _("Email Address"), blank=False, unique=True
     )
-    first_name: models.CharField = models.CharField(max_length=30, blank=False)
-    last_name: models.CharField = models.CharField(max_length=30, blank=False)
-    profile_picture: models.URLField = models.URLField(blank=True)
-    is_verified: models.BooleanField = models.BooleanField(default=False)
-    date_of_birth: models.DateField = models.DateField(null=True)
-    date_created: models.DateTimeField = models.DateTimeField(
+    first_name = models.CharField(max_length=30, blank=False)
+    last_name = models.CharField(max_length=30, blank=False)
+    profile_picture = models.URLField(blank=True)
+    is_verified = models.BooleanField(default=False)
+    date_of_birth = models.DateField(null=True)
+    date_created = models.DateTimeField(
         auto_now_add=True, blank=False
     )
-    last_updated: models.DateTimeField = models.DateTimeField(
+    last_updated = models.DateTimeField(
         auto_now=True, blank=False
     )
 
@@ -42,8 +42,12 @@ class User(AbstractUser):
 
 class SocialAccount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    provider = models.CharField(max_length=255, choices=SOCIAL_ACCOUNT_PROVIDER_CHOICES)
+    # account provider
+    provider = models.CharField(
+        max_length=255, choices=SOCIAL_ACCOUNT_PROVIDER_CHOICES)
+    # account username
     username = models.CharField(max_length=255)
+    account_user_id = models.IntegerField()
     account_created_date = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now=True)
     last_updated = models.DateTimeField(auto_now_add=True)
