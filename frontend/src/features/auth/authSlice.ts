@@ -25,8 +25,8 @@ const authSlice = createSlice({
             state.loggedIn = false
             state.accessToken = null
             state.refreshToken = null
-            localStorage.setItem("accessToken", "")
-            localStorage.setItem("refreshToken", "")
+            localStorage.removeItem("accessToken")
+            localStorage.removeItem("refreshToken")
         }
     },
 })

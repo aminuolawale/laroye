@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +33,7 @@ ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", "backend"]
 
 
 # Application definition
-
+print(os.getenv('POSTGRES_HOST'))
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -43,6 +46,10 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "authentication.apps.AuthenticationConfig",
     "corsheaders",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google"
 ]
 
 MIDDLEWARE = [
@@ -91,7 +98,7 @@ DATABASES = {
         "NAME": os.getenv("POSTGRES_NAME"),
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": "db",
+        "HOST": os.getenv('POSTGRES_HOST'),
         "PORT": 5432,
     }
 }
@@ -113,6 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
 REST_FRAMEWORK = {
@@ -184,3 +196,24 @@ TWITTER_API_URL = "https://api.twitter.com/2"
 TWITTER_API_BEARER_TOKEN = os.getenv("TWITTER_API_BEARER_TOKEN")
 TWITTER_TWEET_CREATED_AT_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 TWITTER_TWEET_USERNAME_FIELD = 'username'
+
+
+
+# GOOGLE BIGQUERY
+
+LAROYE_DATASET = "long-canto-364319.laroye"
+
+
+# all auth
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email'
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online'
+        }
+    }
+}
+SITE_ID = 1

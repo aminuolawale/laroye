@@ -2,7 +2,6 @@ import React from 'react'
 
 const HeroArt = () => {
 
-  // probably blur out the circles to simulate falloff
   return (
     <div className='home__content__hero__art'>
       <div className='home__content__hero__art--xsm'></div>

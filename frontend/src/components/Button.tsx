@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom';
 
-type Props = {
-    text: string;
+interface ButtonProps extends PropsWithChildren {
     size: "xsm" | "sm" | "md" | "lg";
     link: string;
 }
 
-const Button = ({ text, size, link = "/" }: Props) => {
+const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
-        <Link className={`button button--${size}`} to={link}>
-            {text}
+        <Link className={`button button--${props.size}`} to={props.link}>
+            {props.children}
         </Link>
 
     )

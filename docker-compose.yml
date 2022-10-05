@@ -7,51 +7,53 @@ services:
       - ./data/db:/var/lib/postgresql/data
     env_file:
       - ./db/.env
+    ports:
+      - "5432:5432"
 
-  nginx:
-    depends_on:
-      - backend
-      - frontend
-    restart: always
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    links:
-      - "backend"
-      - "frontend"
-      - "db"
-  backend:
-    restart: always
-    # command: python manage.py runserver 0.0.0.0:8000
-    entrypoint: 
-      - ./docker-entrypoint.sh
-      - init
-    container_name: backend
-    build:
-      context: ./backend/
-      dockerfile: Dockerfile
-    volumes:
-      - ./backend:/code
-    ports:
-      - "8000:8000"
-    env_file:
-      - ./backend/.env
-    depends_on:
-      - db
-  frontend:
-    restart: always
-    command: npm start
-    container_name: frontend
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    stdin_open: true
-    depends_on:
-      - backend
+  # nginx:
+  #   depends_on:
+  #     - backend
+  #     - frontend
+  #   restart: always
+  #   build:
+  #     context: ./nginx
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "80:80"
+  #   links:
+  #     - "backend"
+  #     - "frontend"
+  #     - "db"
+  # backend:
+  #   restart: always
+  #   # command: python manage.py runserver 0.0.0.0:8000
+  #   entrypoint: 
+  #     - ./docker-entrypoint.sh
+  #     - init
+  #   container_name: backend
+  #   build:
+  #     context: ./backend/
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./backend:/code
+  #   ports:
+  #     - "8000:8000"
+  #   env_file:
+  #     - ./backend/.env
+  #   depends_on:
+  #     - db
+  # frontend:
+  #   restart: always
+  #   command: npm start
+  #   container_name: frontend
+  #   build:
+  #     context: ./frontend/
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   stdin_open: true
+  #   depends_on:
+  #     - backend
 networks:
   db-net:
     driver: bridge

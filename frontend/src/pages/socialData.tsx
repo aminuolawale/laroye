@@ -7,7 +7,6 @@ const SocialData = () => {
     const [importData, {isLoading}] = useImportDataMutation()
     const [soc, setSoc] = useState([])
     const {id} = useParams();
-    console.log(id,"---")
     const importSocialData= async () =>{
         const {success, errors, data} = await importData({id}).unwrap()
         console.log(data)

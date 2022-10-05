@@ -1,9 +1,9 @@
 from typing import List
 from django.urls import path, include
-from .api import AccountAPI, ImportSocialAccountData, LinkSocialAccountAPI
+from .api import UserAccountAPI, ImportSocialAccountData, LinkSocialAccountAPI
 
 urlpatterns: List[path] = [
-    path("account/", AccountAPI.as_view(), name="user_account"),
+    path("account/", UserAccountAPI.as_view(), name="user_account"),
     path(
         "link-social-account/",
         LinkSocialAccountAPI.as_view(),

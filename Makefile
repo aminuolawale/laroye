@@ -1,6 +1,8 @@
 LIGHTSAIL_STATIC_IP:=3.124.140.45
 LIGHTSAIL_KEY_PATH:= ./key.pem
 LIGHTSAIL_HOST:=ubuntu
+.PHONY: all
+
 startproject:
 	sudo docker-compose run backend django-admin startproject laroye .
 start:

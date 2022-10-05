@@ -41,13 +41,12 @@ class User(AbstractUser):
 
 
 class SocialAccount(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # account provider
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True, related_name="social_accounts")
     provider = models.CharField(
         max_length=255, choices=SOCIAL_ACCOUNT_PROVIDER_CHOICES)
-    # account username
     username = models.CharField(max_length=255)
-    account_user_id = models.IntegerField()
+    account_user_id = models.CharField(max_length=255)
     account_created_date = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now=True)
     last_updated = models.DateTimeField(auto_now_add=True)

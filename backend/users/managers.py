@@ -4,6 +4,9 @@ from django.db.models import Manager as BaseManager
 from django.utils.translation import gettext_lazy as _
 from typing import Dict, Any
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from datetime import datetime
+import pytz
 
 
 class UserManager(BaseUserManager):
@@ -25,8 +28,9 @@ class UserManager(BaseUserManager):
 
 
 class SocialAccountManager(BaseManager):
-    def create_social_account(self, user, provider, username, account_created_date):
+    def create_social_account(self, user, provider, username, account_user_id, account_created_date):
+        account_created_date = pytz.utc.localize(datetime.strptime(account_created_date, settings.TWITTER_TWEET_CREATED_AT_TIME_FORMAT))
         social_account = self.model(
-            user=user, provider=provider, username=username, account_created_date=account_created_date)
+            user=user, provider=provider, username=username, account_user_id=account_user_id, account_created_date=account_created_date)
         social_account.save()
         return social_account
