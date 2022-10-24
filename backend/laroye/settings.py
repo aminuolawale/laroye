@@ -46,10 +46,6 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "authentication.apps.AuthenticationConfig",
     "corsheaders",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google"
 ]
 
 MIDDLEWARE = [
@@ -198,10 +194,9 @@ TWITTER_TWEET_CREATED_AT_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 TWITTER_TWEET_USERNAME_FIELD = 'username'
 
 
-
-# GOOGLE BIGQUERY
-
+# GOOGLE
 LAROYE_DATASET = "long-canto-364319.laroye"
+GOOGLE_ID_TOKEN_INFO_URL = 'https://www.googleapis.com/oauth2/v3/tokeninfo'
 
 
 # all auth

@@ -3,22 +3,15 @@ import { apiSlice } from "../api/apiSlice";
 
 const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        signup: builder.mutation({
+        socialLogin: builder.mutation({
             query: data => ({
-                url: '/auth/registration/',
+                url: '/auth/social-login/',
                 method: 'POST',
-                body: { ...data }
+                body: {...data}
             })
-        }),
-        login: builder.mutation({
-            query: data => ({
-                url: '/auth/login/',
-                method: 'POST',
-                body: { ...data },
-            })
-        }),
+        })
     })
 })
 
 
-export const { useSignupMutation, useLoginMutation } = authApiSlice;
+export const { useSocialLoginMutation} = authApiSlice;

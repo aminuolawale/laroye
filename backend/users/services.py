@@ -5,6 +5,7 @@ from integrations.social import SOCIAL_API_MAPPING
 from typing import Dict
 User = get_user_model()
 
+
 class SocialService:
     def __init__(self, data: Dict) -> None:
         self.username = data.get("username")

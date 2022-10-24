@@ -6,7 +6,6 @@ const errorsSlice = createSlice({
     initialState: [],
     reducers: {
         addErrors: (state:string[], action) => {
-            console.log("errors added")
             state.push(...action.payload)
         }
     }

@@ -8,7 +8,6 @@ import { selectErrors } from "../features/errors/errorsSlice";
 
 const Layout = () => {
   const errors = useSelector(selectErrors);
-  console.log(errors, "______");
   return (
     <div className="layout">
       <Helmet>

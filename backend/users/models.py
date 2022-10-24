@@ -1,3 +1,4 @@
+from email.policy import default
 from typing import Tuple
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -12,6 +13,11 @@ SOCIAL_ACCOUNT_PROVIDER_CHOICES = [
     ("facebook", "facebook"),
 ]
 
+AUTHENTICATION_PROVIDER_CHOICES = [
+    ('google', 'google'),
+    ('custom', 'custom')
+]
+
 
 class User(AbstractUser):
     username = models.CharField(
@@ -20,8 +26,10 @@ class User(AbstractUser):
     email = models.EmailField(
         _("Email Address"), blank=False, unique=True
     )
-    first_name = models.CharField(max_length=30, blank=False)
-    last_name = models.CharField(max_length=30, blank=False)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    source = models.CharField(
+        max_length=20, blank=False, choices=AUTHENTICATION_PROVIDER_CHOICES, default='custom')
     profile_picture = models.URLField(blank=True)
     is_verified = models.BooleanField(default=False)
     date_of_birth = models.DateField(null=True)
