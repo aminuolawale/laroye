@@ -4,7 +4,6 @@ import { useSocialLoginMutation } from "../features/auth/authApiSlice";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
-const clientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
 
 const GoogleLogin = () => {
   const [socialLogin, { isLoading }] = useSocialLoginMutation();

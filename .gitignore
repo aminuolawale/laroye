@@ -4,3 +4,4 @@ data
 .vscode
 *.txt
 .venv
+*__pycache__*
