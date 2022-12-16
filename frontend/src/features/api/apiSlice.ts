@@ -10,7 +10,7 @@ type Error = {
 }
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api",
+    baseUrl: process.env.REACT_APP_ENV ==='dev'?"http://localhost:8000/api":'http://laroye.ai/api/api',
     prepareHeaders: (headers, { getState }) => {
         const accessToken = (getState() as RootState).auth.accessToken
         if (accessToken) {
@@ -20,12 +20,12 @@ const baseQuery = fetchBaseQuery({
         }
         return headers
     },
-    credentials: 'omit'
 })
 
 
 
 const baseQueryWrapper = async(args:any, api:any, extraOptions:any) => {
+    console.log("_______>>>", process.env.REACT_APP_ENV)
     let result = await baseQuery(args, api, extraOptions) 
     const error = result.error as Error
     const statusString = error?.originalStatus?.toString()||""
