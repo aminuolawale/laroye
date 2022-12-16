@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-dm1wdqzs6ndg0+a^ba=w36qag^c7ind8!#^*q_&5!^ezyzr1*(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", "backend"]
+ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", "backend", "http://laroye.ai"]
 
 
 # Application definition
