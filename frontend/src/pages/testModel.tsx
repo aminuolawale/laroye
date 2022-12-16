@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { act } from "react-dom/test-utils";
 import { useForm } from "react-hook-form";
+import Loading from "../components/Loading";
 import { useEvaluateMutation } from "../features/ai/aiApiSlice";
 
 const MODEL_NAMES = [
@@ -15,6 +16,7 @@ const MODEL_ACTIONS = [
 ];
 const TestModel = () => {
   const { register, handleSubmit, watch } = useForm();
+  const [loading, setLoading] = useState(false);
   const [action, setAction] = useState<string>();
   const [evaluate, { isLoading }] = useEvaluateMutation();
   const [results, setResults] = useState({
@@ -23,7 +25,7 @@ const TestModel = () => {
     Topic: "-",
   });
   const onSubmit = async (data: any) => {
-    console.log(data, "this is the data");
+    setLoading(true);
     const {
       success,
       errors,
@@ -34,11 +36,14 @@ const TestModel = () => {
     resultData[action as keyof typeof results] = evaluationData;
     console.log(resultData);
     setResults(resultData);
+    setLoading(false);
   };
   const handleAction = (name: string) => {
     console.log(name);
   };
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="testmodel">
       <form className="testmodel__form" onSubmit={handleSubmit(onSubmit)}>
         <div className="testmodel__formgroup">
