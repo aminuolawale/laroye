@@ -19,6 +19,7 @@ const baseQuery = fetchBaseQuery({
         }
         return headers
     },
+    mode: 'cors'
 })
 
 
