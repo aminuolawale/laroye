@@ -16,6 +16,7 @@ const baseQuery = fetchBaseQuery({
         if (accessToken) {
             headers.set("Authorization", `Bearer ${accessToken}`)
             headers.set('Content-Type', "application/json")
+            headers.set('Access-Control-Allow-Private-Network', "true")
         }
         return headers
     },
