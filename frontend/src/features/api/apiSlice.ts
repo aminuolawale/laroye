@@ -10,7 +10,7 @@ type Error = {
 }
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api",
+    baseUrl: process.env.REACT_APP_ENV as string === 'dev'?'http://localhost:8000/api':'http://laroye.ai/api/api',
     prepareHeaders: (headers, { getState }) => {
         const accessToken = (getState() as RootState).auth.accessToken
         if (accessToken) {
