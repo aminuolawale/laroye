@@ -1,0 +1,56 @@
+.testmodel {
+    margin-top: $navbar-content-margin;
+
+    &__form {
+        margin: auto;
+    }
+
+    &__label {
+        margin-right: 20px;
+    }
+
+    &__formgroup {
+        margin-bottom: 20px;
+    }
+
+    &__textarea>textarea {
+        width: 600px;
+        height: 120px;
+        font-family: $poppins;
+        padding: 10px;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: row;
+
+        &>button {
+            margin-right: 20px;
+            font-size: $sm-font;
+            font-weight: 100;
+        }
+
+        &>button:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__resultsarea {
+        width: 400px;
+        height: 400px;
+        background: $primary-bg-color;
+        margin-bottom: 10px;
+
+        &__items {
+            margin-bottom: 10px;
+
+            &--red {
+                color: red;
+            }
+
+            &--green {
+                color: green;
+            }
+        }
+    }
+}

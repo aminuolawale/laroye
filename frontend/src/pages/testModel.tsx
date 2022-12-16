@@ -11,7 +11,7 @@ const MODEL_NAMES = [
 const MODEL_ACTIONS = [
   { name: "Validation", active: true },
   { name: "Sentiment", active: false },
-  { name: "Topics", active: false },
+  { name: "Topic", active: false },
 ];
 const TestModel = () => {
   const { register, handleSubmit, watch } = useForm();
@@ -39,10 +39,10 @@ const TestModel = () => {
     console.log(name);
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="model" id="model">
+    <div className="testmodel">
+      <form className="testmodel__form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="testmodel__formgroup">
+          <label className="testmodel__label" htmlFor="model" id="model">
             Choose a model
           </label>
           <select required id="model" {...register("model")}>
@@ -53,10 +53,10 @@ const TestModel = () => {
             ))}
           </select>
         </div>
-        <div>
+        <div className="testmodel__formgroup testmodel__textarea">
           <textarea required {...register("text")} />
         </div>
-        <div>
+        <div className="testmodel__formgroup testmodel__actions">
           {MODEL_ACTIONS.map(({ name, active }) => (
             <button
               key={name}
@@ -69,11 +69,20 @@ const TestModel = () => {
         </div>
       </form>
       <div>
-        <h1>Results</h1>
-        <div>
+        <h3>Results</h3>
+        <div className="testmodel__resultsarea">
           {MODEL_ACTIONS.map(({ name }) => (
-            <p key={name}>
-              {name}: {results[name as keyof typeof results]}
+            <p className="testmodel__resultsarea__items" key={name}>
+              {name}:{" "}
+              <span
+                className={`testmodel__resultsarea__items--${
+                  results[name as keyof typeof results] == "YES"
+                    ? "green"
+                    : "red"
+                }`}
+              >
+                {results[name as keyof typeof results]}
+              </span>
             </p>
           ))}
         </div>
