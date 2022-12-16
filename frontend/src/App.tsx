@@ -8,6 +8,7 @@ import Logout from "./pages/logout";
 import Account from "./pages/account";
 import SocialData from "./pages/socialData";
 import NotFound from "./pages/notFound";
+import TestModel from "./pages/testModel";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
           <Route path="account" element={<Account />} />
+          <Route path="test" element={<TestModel />} />
           <Route path="social/social-data/:id" element={<SocialData />} />
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "users.apps.UsersConfig",
     "authentication.apps.AuthenticationConfig",
+    "ai.apps.AiConfig",
     "corsheaders",
 ]
 
@@ -212,3 +213,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 SITE_ID = 1
+
+
+AI_MODELS_DIR = os.path.join(BASE_DIR, "ai_models")
+FASTTEXT_MODEL_NAME= "val_small_model.bin"

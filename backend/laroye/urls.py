@@ -7,5 +7,6 @@ urlpatterns: List[path] = [
     # re_path(r"^(?:.*)/?$", TemplateView.as_view(template_name="build/index.html")),
     path('admin/', admin.site.urls),
     path("api/users/", include("users.urls")),
-    path('api/auth/', include('authentication.urls'))
+    path('api/auth/', include('authentication.urls')),
+    path('api/evaluate/', include('ai.urls'))
 ]

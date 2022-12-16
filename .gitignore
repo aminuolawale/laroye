@@ -5,3 +5,4 @@ data
 *.txt
 .venv
 *__pycache__*
+*.bin

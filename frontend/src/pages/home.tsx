@@ -23,9 +23,12 @@ const Home: React.FC<{}> = () => {
               >
                 View our pitch
               </a>
+              <Button size="sm" link="test">
+                Test Models
+              </Button>
             </div>
           </div>
-          <HeroArt />å
+          <HeroArt />
         </div>
       </div>
     </div>
