@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt",
+    "corsheaders",
     "users.apps.UsersConfig",
     "authentication.apps.AuthenticationConfig",
     "ai.apps.AiConfig",
-    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
-    "http://laroye.ai",
+    "http://laroye.ai/",
 ]
 
 ROOT_URLCONF = "laroye.urls"
