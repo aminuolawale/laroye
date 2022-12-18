@@ -217,4 +217,6 @@ SITE_ID = 1
 
 
 AI_MODELS_DIR = os.path.join(BASE_DIR, "ai_models")
-FASTTEXT_MODEL_NAME= "val_small_model.bin"
+FASTTEXT_VALIDATION_MODEL= "fast_valid.bin"
+FASTTEXT_SENTIMENT_MODEL= "fast_sen.bin"
+FASTTEXT_TOPIC_MODEL= "fast_top.bin"

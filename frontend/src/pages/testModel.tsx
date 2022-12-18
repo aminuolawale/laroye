@@ -16,6 +16,7 @@ const MODEL_ACTIONS = [
 ];
 const TestModel = () => {
   const { register, handleSubmit, watch } = useForm();
+  const [isMultiple, setIsMultiple] = useState();
   const [loading, setLoading] = useState(false);
   const [action, setAction] = useState<string>();
   const [evaluate, { isLoading }] = useEvaluateMutation();
