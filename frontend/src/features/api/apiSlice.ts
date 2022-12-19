@@ -25,7 +25,6 @@ const baseQuery = fetchBaseQuery({
 
 
 const baseQueryWrapper = async(args:any, api:any, extraOptions:any) => {
-    console.log("_______>>>", process.env.REACT_APP_ENV)
     let result = await baseQuery(args, api, extraOptions) 
     const error = result.error as Error
     const statusString = error?.originalStatus?.toString()||""

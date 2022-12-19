@@ -1,0 +1,45 @@
+.textareas {
+    &__list {
+        display: flex;
+        flex-direction: column;
+
+        &__group {
+            display: flex;
+            align-items: center;
+
+            &>textarea {
+                margin-bottom: 10px;
+                width: 600px;
+                height: 100px;
+                font-family: $poppins;
+                padding: 10px;
+                margin-right: 5px;
+            }
+
+            &>button {
+                font-style: inherit;
+                background: $tertiary-color;
+                color: $white;
+                padding: 10px;
+                font-size: $xsm-font;
+                border-radius: 5px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &__addbutton {
+        background: $primary-color;
+        color: $white;
+        font-size: $xsm-font;
+        padding: 10px;
+        border-radius: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

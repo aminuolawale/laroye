@@ -1,0 +1,27 @@
+.resultcard {
+    border: 1px solid $primary-color;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 600px;
+    padding: 10px;
+    background: $primary-color;
+
+    &__results {
+        display: flex;
+
+        &__text {
+            margin-bottom: 10px;
+            border: 1px solid $primary-color;
+            border-radius: 8px;
+            padding: 5px;
+            background: $white;
+        }
+
+        &>p {
+            padding: 5px;
+            border-radius: 5px;
+            margin-right: 10px;
+            color: $white;
+        }
+    }
+}

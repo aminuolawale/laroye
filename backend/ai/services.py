@@ -2,8 +2,7 @@
 import fasttext
 import os
 from django.conf import settings
-
-
+from typing import List
 
 
 ACTION_MODEL_MAP = {
@@ -23,18 +22,21 @@ SENTIMENT_MAP = {
     "__label__neutral": 'NEUTRAL',
     "__label__negative": 'NEGATIVE'}
 
+
+
 class ActionsService:
-    def __init__(self, data) -> None:
-        self.data = data
-        self.action = self.data.get("action")
+    def __init__(self, model:str, action:str, payload:List[dict]) -> None:
+        self.action = action
+        self.payload = payload
         fasttext_model_path = os.path.join(settings.AI_MODELS_DIR, getattr(settings, ACTION_MODEL_MAP.get(self.action)))
         self.model = fasttext.load_model(fasttext_model_path)
 
-
     def evaluate(self):
-        texts = [item.get("text") for item in self.data.get("payload")]
+        texts = [item.get("value") for item in self.payload]
         temp_results = self.get_handler(self.action)(texts)
-        result = [dict(id=item.get("id"), text=item.get("text"), result=result) for (item, result) in zip(self.data.get("payload"), temp_results)]
+        print(">>>>", self.get_handler(self.action))
+        result = [dict(id=item.get("id"), text=item.get("value"), result=result) for (item, result) in zip(self.payload, temp_results)]
+
         return result
 
     def get_handler(self, action):
@@ -43,11 +45,14 @@ class ActionsService:
         return handler
 
     def do_validation(self, items):
-        return [VALIDATION_MAP.get(self.model.predict(text)[0][0]) for text in items]
+        return [dict(VALIDATION=VALIDATION_MAP.get(self.model.predict(text)[0][0]), SENTIMENT=None, TOPIC=None) for text in items]
 
     def do_sentiment(self, items):
-        return [SENTIMENT_MAP.get(self.model.predict(text)[0][0]) for text in items]
+        return [dict(VALIDATION=None, SENTIMENT=SENTIMENT_MAP.get(self.model.predict(text)[0][0]), TOPIC=None) for text in items]
         
 
     def do_topic(self, items):
-        return[self.model.predict(text)[0][0].split("__")[-1].upper() for text in items]
+        return[dict(VALIDATION=None, SENTIMENT=None, TOPIC=self.model.predict(text)[0][0].split("__")[-1].upper()) for text in items]
+    
+    def clean_texts(self, texts):
+        return [text.replace("\n","") for text in texts]

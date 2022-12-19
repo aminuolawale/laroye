@@ -1,8 +1,18 @@
 .testmodel {
+    display: flex;
+    width: 100%;
+    margin: auto;
     margin-top: $navbar-content-margin;
+    align-items: flex-start;
+
+    &__results {
+        width: 100%;
+    }
 
     &__form {
         margin: auto;
+        width: 100%;
+
     }
 
     &__label {

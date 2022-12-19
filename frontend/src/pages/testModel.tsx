@@ -2,46 +2,56 @@ import React, { useState } from "react";
 import { act } from "react-dom/test-utils";
 import { useForm } from "react-hook-form";
 import Loading from "../components/Loading";
+import TextAreas from "../components/TextAreas";
 import { useEvaluateMutation } from "../features/ai/aiApiSlice";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getTextAreas } from "../features/textarea/textAreaSlice";
+import ResultCard from "../components/ResultCard";
+import { getResults, setResults } from "../features/ai/aiSlice";
 const MODEL_NAMES = [
-  { name: "Fast Text", id: "fast-text" },
-  { name: "GPT-Neo", id: "gpt-neo" },
-  { name: "OPT", id: "opt" },
+  { name: "Fast Text", id: "fast-text", active: true },
+  { name: "GPT-Neo", id: "gpt-neo", active: false },
+  { name: "OPT", id: "opt", active: false },
 ];
 const MODEL_ACTIONS = [
-  { name: "Validation", active: true },
-  { name: "Sentiment", active: false },
-  { name: "Topic", active: false },
+  { name: "Validation", id: "VALIDATION", active: true },
+  { name: "Sentiment", id: "SENTIMENT", active: true },
+  { name: "Topic", id: "TOPIC", active: true },
 ];
 const TestModel = () => {
-  const { register, handleSubmit, watch } = useForm();
-  const [isMultiple, setIsMultiple] = useState();
+  const dispatch = useDispatch();
+  const textAreas = useSelector(getTextAreas);
+  const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
   const [action, setAction] = useState<string>();
   const [evaluate, { isLoading }] = useEvaluateMutation();
-  const [results, setResults] = useState({
-    Validation: "-",
-    Sentiment: "-",
-    Topic: "-",
-  });
   const onSubmit = async (data: any) => {
     setLoading(true);
+    const requestData = {
+      model: data.model,
+      action,
+      payload: textAreas
+        .filter(({ value }: { value: string }) => value.length > 0)
+        .map(({ id, value }: { id: string; value: string }) => ({
+          id,
+          value: value.replace(/(\r\n|\n|\r)/gm, ""),
+        })),
+    };
+    console.log(requestData);
     const {
       success,
       errors,
       data: evaluationData,
-    } = (await evaluate({ ...data, action }).unwrap()) as any;
-    const resultData = { ...results };
-    console.log("---", evaluationData);
-    resultData[action as keyof typeof results] = evaluationData;
-    console.log(resultData);
-    setResults(resultData);
+    } = (await evaluate(requestData).unwrap()) as any;
+    console.log("evaluationdata", evaluationData);
+    dispatch(setResults({ results: evaluationData, action: action }));
     setLoading(false);
   };
   const handleAction = (name: string) => {
     console.log(name);
   };
+  const results = useSelector(getResults);
+  console.log("results----", results);
   return loading ? (
     <Loading />
   ) : (
@@ -52,46 +62,28 @@ const TestModel = () => {
             Choose a model
           </label>
           <select required id="model" {...register("model")}>
-            {MODEL_NAMES.map(({ name: modelName, id }) => (
-              <option key={id} value={id}>
+            {MODEL_NAMES.map(({ name: modelName, id, active }) => (
+              <option key={id} value={id} disabled={!active}>
                 {modelName}
               </option>
             ))}
           </select>
         </div>
-        <div className="testmodel__formgroup testmodel__textarea">
-          <textarea required {...register("text")} />
-        </div>
+        <TextAreas />
         <div className="testmodel__formgroup testmodel__actions">
-          {MODEL_ACTIONS.map(({ name, active }) => (
-            <button
-              key={name}
-              onClick={() => setAction(name)}
-              disabled={!active}
-            >
+          {MODEL_ACTIONS.map(({ name, active, id }) => (
+            <button key={name} onClick={() => setAction(id)} disabled={!active}>
               {name}
             </button>
           ))}
         </div>
       </form>
-      <div>
+      <div className="testmodel__results">
         <h3>Results</h3>
-        <div className="testmodel__resultsarea">
-          {MODEL_ACTIONS.map(({ name }) => (
-            <p className="testmodel__resultsarea__items" key={name}>
-              {name}:{" "}
-              <span
-                className={`testmodel__resultsarea__items--${
-                  results[name as keyof typeof results] == "YES"
-                    ? "green"
-                    : "red"
-                }`}
-              >
-                {results[name as keyof typeof results]}
-              </span>
-            </p>
+        {results.length > 0 &&
+          results.map((resultItem: any) => (
+            <ResultCard text={resultItem.text} result={resultItem.result} />
           ))}
-        </div>
       </div>
     </div>
   );
