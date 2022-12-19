@@ -6,6 +6,8 @@
     padding: 10px;
     background: $primary-color;
 
+    font-size: $xsm-font;
+
     &__results {
         display: flex;
 
@@ -45,4 +47,10 @@
         }
 
     }
+}
+
+span {
+    border: 1px solid $tertiary-color;
+    padding: 2px 5px;
+    margin-left: 2px;
 }

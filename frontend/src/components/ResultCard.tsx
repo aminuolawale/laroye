@@ -28,9 +28,25 @@ const ResultCard = (props: any) => {
       </p>
       <div className="resultcard__results">
         <div className="resultcard__results__inner">
-          <p>Validation: {props.result.VALIDATION}</p>
-          <p>Sentiment: {props.result.SENTIMENT}</p>
-          <p>Topic: {props.result.TOPIC}</p>
+          <p>
+            Validation:{" "}
+            {props.result.VALIDATION ? (
+              <span>{props.result.VALIDATION}</span>
+            ) : (
+              ""
+            )}
+          </p>
+          <p>
+            Sentiment:
+            {props.result.SENTIMENT ? (
+              <span>{props.result.SENTIMENT}</span>
+            ) : (
+              ""
+            )}
+          </p>
+          <p>
+            Topic: {props.result.TOPIC ? <span>{props.result.TOPIC}</span> : ""}
+          </p>
         </div>
         <p
           className="resultcard__results__clear"
