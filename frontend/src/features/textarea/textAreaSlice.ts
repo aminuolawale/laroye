@@ -8,7 +8,9 @@ const textAreaSlice = createSlice({
     initialState: [{id: `${Math.floor(Math.random()*1000)}`, value:""}],
     reducers: {
         addTextArea: (state) => {
-            state.push({id:`${Math.floor(Math.random()*1000)}`, value:""})
+            if (state[state.length-1].value!==""){
+                state.push({id:`${Math.floor(Math.random()*1000)}`, value:""})
+            }
         },
         setTextArea: (state, action) => {
             const {id, value} = action.payload;
