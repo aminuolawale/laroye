@@ -77,7 +77,11 @@ const TestModel = () => {
         <h3>Results</h3>
         {results.length > 0 &&
           results.map((resultItem: any) => (
-            <ResultCard text={resultItem.text} result={resultItem.result} />
+            <ResultCard
+              text={resultItem.text}
+              id={resultItem.id}
+              result={resultItem.result}
+            />
           ))}
       </div>
     </div>

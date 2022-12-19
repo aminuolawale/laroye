@@ -30,6 +30,13 @@ const aiSlice = createSlice({
             if (entry){
                 state.splice(state.indexOf(entry),1)
             }
+        },
+        clearResult:(state, action)=>{
+            const {id} = action.payload;
+            const entry = state.find(item=> item.id === id) as R
+            if (entry) {
+                state[state.indexOf(entry)] = {...entry, result:{VALIDATION:"", SENTIMENT:"", TOPIC:""}}
+            }
         }
     }
 })
@@ -38,5 +45,5 @@ const aiSlice = createSlice({
 
 export default aiSlice.reducer;
 
-export const {setResults, removeResult} = aiSlice.actions;
+export const {setResults, removeResult, clearResult} = aiSlice.actions;
 export const getResults = (state:any) => state.ai;
