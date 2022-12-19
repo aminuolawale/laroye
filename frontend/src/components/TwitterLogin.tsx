@@ -5,9 +5,7 @@ const clientId = process.env.REACT_APP_TWITTER_OAUTH_CLIENT_ID as string;
 const clientSecret = process.env
   .REACT_APP_TWITTER_OAUTH_CLIENT_SECRET as string;
 const TwitterLogin = () => {
-  const authHandler = (err: any, data: any) => {
-    console.log(err, data);
-  };
+  const authHandler = (err: any, data: any) => {};
   return (
     <TwitterLoginComponent
       authCallback={authHandler}

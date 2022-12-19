@@ -18,9 +18,7 @@ const GoogleLogin = () => {
     dispatch(loginUser({ accessToken, refreshToken }));
     navigate("/account");
   };
-  const handleFailure = () => {
-    console.log("there was a failure");
-  };
+  const handleFailure = () => {};
   return (
     <div>
       <GoogleLoginComponent

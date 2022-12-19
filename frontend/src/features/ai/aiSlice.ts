@@ -27,7 +27,9 @@ const aiSlice = createSlice({
         removeResult:(state, action)=> {
             const {id} = action.payload;
             const entry = state.find(item => item.id===id) as R
-            state.splice(state.indexOf(entry),1)
+            if (entry){
+                state.splice(state.indexOf(entry),1)
+            }
         }
     }
 })

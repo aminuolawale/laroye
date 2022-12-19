@@ -37,21 +37,16 @@ const TestModel = () => {
           value: value.replace(/(\r\n|\n|\r)/gm, ""),
         })),
     };
-    console.log(requestData);
     const {
       success,
       errors,
       data: evaluationData,
     } = (await evaluate(requestData).unwrap()) as any;
-    console.log("evaluationdata", evaluationData);
     dispatch(setResults({ results: evaluationData, action: action }));
     setLoading(false);
   };
-  const handleAction = (name: string) => {
-    console.log(name);
-  };
+  const handleAction = (name: string) => {};
   const results = useSelector(getResults);
-  console.log("results----", results);
   return loading ? (
     <Loading />
   ) : (

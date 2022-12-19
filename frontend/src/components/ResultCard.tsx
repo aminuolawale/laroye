@@ -10,7 +10,6 @@ const ResultCard = (props: any) => {
       setTextValue(props.text);
     }
   }, [props.text]);
-  console.log("theprops", props);
   return (
     <div className="resultcard">
       <p

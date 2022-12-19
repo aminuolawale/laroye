@@ -22,7 +22,9 @@ const textAreaSlice = createSlice({
             if (state.length>1){
                 const {id} = action.payload;
                 const entry = state.find(item => item.id === id) as TextEntry
-                state.splice(state.indexOf(entry),1)
+                if(entry){
+                    state.splice(state.indexOf(entry),1)
+                }
             }
              else {
                 state[0].value = ''
