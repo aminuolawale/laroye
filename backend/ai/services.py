@@ -34,7 +34,6 @@ class ActionsService:
     def evaluate(self):
         texts = [item.get("value") for item in self.payload]
         temp_results = self.get_handler(self.action)(texts)
-        print(">>>>", self.get_handler(self.action))
         result = [dict(id=item.get("id"), text=item.get("value"), result=result) for (item, result) in zip(self.payload, temp_results)]
 
         return result

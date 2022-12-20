@@ -8,7 +8,6 @@ class ActionsView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = ActionSerializer(data=request.data)
         if serializer.is_valid():
-            print(serializer.validated_data, "----------")
             model = serializer.validated_data.get("model")
             action= serializer.validated_data.get("action")
             payload = serializer.validated_data.get("payload")
